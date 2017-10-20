@@ -8,6 +8,8 @@
  */
 package org.openhab.binding.exec;
 
+import java.util.Set;
+
 import org.eclipse.smarthome.core.thing.ThingTypeUID;
 
 /**
@@ -22,6 +24,9 @@ public class ExecBindingConstants {
 
     // List of all Thing Type UIDs
     public static final ThingTypeUID THING_COMMAND = new ThingTypeUID(BINDING_ID, "command");
+    public static final ThingTypeUID THING_CONTROL = new ThingTypeUID(BINDING_ID, "control");
+
+    private static final Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = IutableSet.singleton(THING_COMMAND);
 
     // List of all Channel ids
     public static final String OUTPUT = "output";

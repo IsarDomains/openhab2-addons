@@ -4,7 +4,7 @@ This binding integrates the possibility to execute arbitrary shell commands.
 
 ## Supported Things
 
-Currently, the binding supports a single type of Thing, being the ```command``` Thing.
+Currently, the binding supports a single type of Thing, being the `command` Thing.
 
 ## Binding Configuration
 
@@ -27,7 +27,7 @@ For each command a separate Thing has to be defined.
 Thing exec:command:apc [command="/usr/local/bin/apcaccess  status", interval=15, timeout=5, autorun=false]
 ```
 
-```command``` itself can be enhanced using the well known syntax of the **java.util.Formatter** class. 
+`command` itself can be enhanced using the well known syntax of the **java.util.Formatter** class. 
 The following parameters are automatically added:
 
 - the current date (as java.util.Date, example: `%1$tY-%1$tm-%1$td`)
@@ -37,20 +37,20 @@ The following parameters are automatically added:
 
 All Things support the following channels:
 
-| Channel Type ID | Item Type    | Description  |
-|-----------------|------------------------|--------------|----------------- |------------- |
-| input | String       | Input parameter to provide to the command |
-| output | String       | Output of the last execution of the command |
-| exit | Number       | The exit value of the last execution of the command |
-| run | Switch       | Send ON to execute the command and the current state tells whether it is running or not |
-| lastexecution | DateTime       | Time/Date the command was last executed, in yyyy-MM-dd'T'HH:mm:ss.SSSZ format |
+| Channel Type ID | Item Type | Description                                                                             |
+|-----------------|-----------|-----------------------------------------------------------------------------------------|
+| input           | String    | Input parameter to provide to the command                                               |
+| output          | String    | Output of the last execution of the command                                             |
+| exit            | Number    | The exit value of the last execution of the command                                     |
+| run             | Switch    | Send ON to execute the command and the current state tells whether it is running or not |
+| lastexecution   | DateTime  | Time/Date the command was last executed, in yyyy-MM-dd'T'HH:mm:ss.SSSZ format           |
 
 ## Full Example
 
 **demo.things**
 
 ```
-Thing exec:command:apc [command="/usr/local/bin/apcaccess  status", interval=15, timeout=5]
+Thing exec:command:apc [command="/usr/local/bin/apcaccess status", interval=15, timeout=5]
 Thing exec:command:myscript [command="php ./configurations/scripts/script.php %2$s", transform="REGEX((.*?))"]
 ```
 

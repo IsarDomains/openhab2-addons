@@ -233,12 +233,7 @@ public class DSMRDevice implements DSMRPortEventListener {
                         logger.warn("Unknown event {}", event);
                 }
                 // Handle the current state asynchronous
-                executor.submit(new Runnable() {
-                    @Override
-                    public void run() {
-                        handleDeviceState();
-                    }
-                });
+                executor.submit(this::handleDeviceState);
             } else {
                 logger.debug("Event won't be processed due to state {}", deviceStatus.deviceState);
             }

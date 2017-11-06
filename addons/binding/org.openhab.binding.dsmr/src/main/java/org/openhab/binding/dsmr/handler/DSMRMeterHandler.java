@@ -35,6 +35,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The MeterHandler will create logic DSMR meter ThingTypes
+ *
+ * @author M. Volaart - Initial contribution
  */
 public class DSMRMeterHandler extends BaseThingHandler implements DSMRMeterListener {
     private final Logger logger = LoggerFactory.getLogger(DSMRMeterHandler.class);

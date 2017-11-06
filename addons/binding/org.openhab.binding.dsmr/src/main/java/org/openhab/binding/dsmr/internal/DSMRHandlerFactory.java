@@ -16,12 +16,14 @@ import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.ThingTypeUID;
 import org.eclipse.smarthome.core.thing.binding.BaseThingHandlerFactory;
 import org.eclipse.smarthome.core.thing.binding.ThingHandler;
+import org.eclipse.smarthome.core.thing.binding.ThingHandlerFactory;
 import org.openhab.binding.dsmr.DSMRBindingConstants;
 import org.openhab.binding.dsmr.handler.DSMRBridgeHandler;
 import org.openhab.binding.dsmr.handler.DSMRMeterHandler;
 import org.openhab.binding.dsmr.internal.discovery.DSMRMeterDiscoveryService;
 import org.openhab.binding.dsmr.internal.meter.DSMRMeterType;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.service.component.annotations.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,6 +34,7 @@ import org.slf4j.LoggerFactory;
  * @author M. Volaart
  * @since 2.1.0
  */
+@Component(service = ThingHandlerFactory.class, immediate = true)
 public class DSMRHandlerFactory extends BaseThingHandlerFactory {
     private final Logger logger = LoggerFactory.getLogger(DSMRHandlerFactory.class);
 

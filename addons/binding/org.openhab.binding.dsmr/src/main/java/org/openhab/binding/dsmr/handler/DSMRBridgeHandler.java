@@ -15,6 +15,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.smarthome.config.core.Configuration;
 import org.eclipse.smarthome.core.thing.Bridge;
 import org.eclipse.smarthome.core.thing.ChannelUID;
@@ -71,7 +72,7 @@ public class DSMRBridgeHandler extends BaseBridgeHandler implements DSMRDeviceSt
      * @param bridge the Bridge ThingType
      * @param discoveryService the DSMRMeterDiscoveryService to use for new DSMR meters
      */
-    public DSMRBridgeHandler(Bridge bridge, DSMRMeterDiscoveryService discoveryService) {
+    public DSMRBridgeHandler(@NonNull Bridge bridge, DSMRMeterDiscoveryService discoveryService) {
         super(bridge);
 
         this.discoveryService = discoveryService;
@@ -112,12 +113,8 @@ public class DSMRBridgeHandler extends BaseBridgeHandler implements DSMRDeviceSt
             dsmrDevice.startDevice();
 
             // Initialize meter watchdog
-            watchdog = scheduler.scheduleWithFixedDelay(new Runnable() {
-                @Override
-                public void run() {
-                    dsmrDevice.alive();
-                }
-            }, DSMRDeviceConstants.RECOVERY_TIMEOUT, DSMRDeviceConstants.RECOVERY_TIMEOUT, TimeUnit.MILLISECONDS);
+            watchdog = scheduler.scheduleWithFixedDelay(dsmrDevice::alive, DSMRDeviceConstants.RECOVERY_TIMEOUT,
+                    DSMRDeviceConstants.RECOVERY_TIMEOUT, TimeUnit.MILLISECONDS);
 
         }
     }

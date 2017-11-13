@@ -8,8 +8,8 @@
  */
 package org.openhab.binding.dsmr.internal.device.p1telegram;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
@@ -102,7 +102,7 @@ public class P1TelegramParser {
     /**
      * Received Cosem Objects in the current received P1Telegram
      */
-    private List<CosemObject> cosemObjects = new LinkedList<>();
+    private List<CosemObject> cosemObjects = new ArrayList<>();
 
     /**
      * Listener for received P1 telegrams

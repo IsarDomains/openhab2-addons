@@ -141,7 +141,7 @@ public class DSMRMeter {
      */
     @Override
     public boolean equals(Object other) {
-        if (other == null || !(other instanceof DSMRMeter)) {
+        if (!(other instanceof DSMRMeter)) {
             return false;
         }
         DSMRMeter o = (DSMRMeter) other;

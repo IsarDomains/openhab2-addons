@@ -22,7 +22,9 @@ Import-Package:
  org.openhab.binding.dsmr,
  org.openhab.binding.dsmr.handler,
  org.osgi.framework,
+ org.osgi.service.component.annotations;resolution:=optional,
  org.slf4j
 Service-Component: OSGI-INF/*.xml
 Export-Package: org.openhab.binding.dsmr,
  org.openhab.binding.dsmr.handler
+Bundle-ActivationPolicy: lazy

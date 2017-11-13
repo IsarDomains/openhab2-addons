@@ -275,12 +275,9 @@ public class DSMRDevice implements DSMRPortEventListener {
                         cosemObjects.addAll(deviceStatus.receivedCosemObjects);
 
                         // Handle cosem objects asynchronous
-                        executor.submit(new Runnable() {
-                            @Override
-                            public void run() {
-                                logger.debug("Processing {} cosem objects", cosemObjects);
-                                sendCosemObjects(cosemObjects);
-                            }
+                        executor.submit(() -> {
+                            logger.debug("Processing {} cosem objects", cosemObjects);
+                            sendCosemObjects(cosemObjects);
                         });
 
                         deviceStatus.receivedCosemObjects.clear();
@@ -345,11 +342,15 @@ public class DSMRDevice implements DSMRPortEventListener {
             cosemObjects.removeAll(processedCosemObjects);
         }
 
+        detectDevices(cosemObjects);
+    }
+
+    private void detectDevices(List<CosemObject> cosemObjects) {
         /*
          * There are still unhandled cosemObjects. Start discovery of DSMR meters
          */
         if (!cosemObjects.isEmpty()) {
-            logger.info("There are unhandled CosemObjects, start autodetecting meters");
+            logger.debug("There are unhandled CosemObjects, start autodetecting meters {}", cosemObjects);
 
             List<DSMRMeterDescriptor> detectedMeters = meterDetector.detectMeters(cosemObjects);
             logger.info("Detected the following new meters: {}", detectedMeters.toString());
@@ -479,12 +480,7 @@ public class DSMRDevice implements DSMRPortEventListener {
              * No update of state of received telegrams for a period of RECOVERY_TIMEOUT
              * Evaluate current state
              */
-            executor.submit(new Runnable() {
-                @Override
-                public void run() {
-                    handleDeviceState();
-                }
-            });
+            executor.submit(this::handleDeviceState);
         }
     }
 

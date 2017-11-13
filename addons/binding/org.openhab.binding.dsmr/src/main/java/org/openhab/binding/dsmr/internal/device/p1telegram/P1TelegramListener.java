@@ -30,7 +30,7 @@ public interface P1TelegramListener {
      * @author M. Volaart
      * @since 2.1.0
      */
-    public enum TelegramState {
+    enum TelegramState {
         OK("P1 telegram received OK"),
         CRC_ERROR("CRC checksum failed for received P1 telegram"),
         DATA_CORRUPTION("Received P1 telegram is corrupted");
@@ -38,7 +38,7 @@ public interface P1TelegramListener {
         /**
          * public accessible state details
          */
-        public final String stateDetails;
+        public String stateDetails;
 
         /**
          * Constructs a new TelegramState enum
@@ -64,5 +64,5 @@ public interface P1TelegramListener {
      * @param cosemObjects List of received CosemObjects within the P1 telegram
      * @param telegramState {@link TelegramState} containing meta data about the received telegram
      */
-    public void telegramReceived(List<CosemObject> cosemObjects, TelegramState telegramState);
+    void telegramReceived(List<CosemObject> cosemObjects, TelegramState telegramState);
 }

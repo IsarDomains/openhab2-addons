@@ -23,7 +23,7 @@ public class CosemValueDescriptor {
     /**
      * Class describing the COSEM value class
      */
-    private final Class<? extends CosemValue<? extends Object>> cosemValueClass;
+    private final Class<? extends CosemValue<?>> cosemValueClass;
 
     /**
      * String describing the unit of the COSEM value
@@ -42,8 +42,7 @@ public class CosemValueDescriptor {
      * @param unit the unit for the CosemValue
      * @param ohChannelId the channel for this CosemValueDescriptor
      */
-    public CosemValueDescriptor(Class<? extends CosemValue<? extends Object>> cosemValueClass, String unit,
-            String ohChannelId) {
+    public CosemValueDescriptor(Class<? extends CosemValue<?>> cosemValueClass, String unit, String ohChannelId) {
         this.cosemValueClass = cosemValueClass;
         this.unit = unit;
         this.ohCannelId = ohChannelId;
@@ -55,7 +54,7 @@ public class CosemValueDescriptor {
      * @param cosemValueClass the CosemValue class that the CosemValueDescriptor represent
      * @param unit the unit for the CosemValue
      */
-    public CosemValueDescriptor(Class<? extends CosemValue<? extends Object>> cosemValueClass, String unit) {
+    public CosemValueDescriptor(Class<? extends CosemValue<?>> cosemValueClass, String unit) {
         this(cosemValueClass, unit, DEFAULT_CHANNEL);
     }
 
@@ -64,7 +63,7 @@ public class CosemValueDescriptor {
      *
      * @return the class of the CosemValue
      */
-    public Class<? extends CosemValue<? extends Object>> getCosemValueClass() {
+    public Class<? extends CosemValue<?>> getCosemValueClass() {
         return cosemValueClass;
     }
 

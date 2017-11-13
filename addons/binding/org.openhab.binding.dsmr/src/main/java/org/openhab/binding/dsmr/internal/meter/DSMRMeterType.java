@@ -263,7 +263,7 @@ public enum DSMRMeterType {
     SLAVE_ELECTRICITY_V5_0(DSMRMeterKind.SLAVE_ELECTRICITY1, CosemObjectType.METER_EQUIPMENT_IDENTIFIER,
             CosemObjectType.METER_DEVICE_TYPE, CosemObjectType.METER_EQUIPMENT_IDENTIFIER,
             CosemObjectType.EMETER_VALUE);
-    // @formatter:off
+    // @formatter:on
 
     public static final Set<ThingTypeUID> METER_THING_TYPES;
     static {

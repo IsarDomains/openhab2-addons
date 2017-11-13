@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import org.eclipse.smarthome.config.core.Configuration;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.ThingStatus;
@@ -82,11 +81,7 @@ public class DSMRMeterHandler extends BaseThingHandler implements DSMRMeterListe
     public void initialize() {
         logger.debug("Initialize MeterHandler for Thing {}", getThing().getUID());
 
-        Configuration config = getThing().getConfiguration();
-        DSMRMeterConfiguration meterConfig = null;
-
-        // Since the config instance cannot be null we don't check it
-        meterConfig = config.as(DSMRMeterConfiguration.class);
+        DSMRMeterConfiguration meterConfig = getConfigAs(DSMRMeterConfiguration.class);
 
         /*
          * The meterConfig can only be null if the specified class doesn't have a constructor have 0 arguments.
@@ -161,7 +156,7 @@ public class DSMRMeterHandler extends BaseThingHandler implements DSMRMeterListe
      */
     @Override
     public void meterValueReceived(CosemObject obj) {
-        Map<String, ? extends CosemValue<? extends Object>> cosemValues = obj.getCosemValues();
+        Map<String, ? extends CosemValue<?>> cosemValues = obj.getCosemValues();
 
         // Update the internal states
         if (!cosemValues.isEmpty()) {

@@ -41,7 +41,7 @@ public class CosemObject {
     private static final Pattern cosemValuesPattern = Pattern.compile("(\\(([^\\(\\)]*)\\))");
 
     /**
-     * CosemObject yype
+     * CosemObject type
      */
     private final CosemObjectType type;
 
@@ -53,7 +53,7 @@ public class CosemObject {
     /**
      * List of COSEM value in this message
      */
-    private Map<String, CosemValue<? extends Object>> cosemValues;
+    private Map<String, CosemValue<?>> cosemValues;
 
     /**
      * Construct a new CosemObject with the specified OBIS Message Type
@@ -99,24 +99,8 @@ public class CosemObject {
      *
      * @return List of {@link CosemValue} that are part of this Cosem Object
      */
-    public Map<String, ? extends CosemValue<? extends Object>> getCosemValues() {
+    public Map<String, ? extends CosemValue<?>> getCosemValues() {
         return cosemValues;
-    }
-
-    /**
-     * Returns the specified Cosem value from the available Cosem values
-     *
-     * Returns null if the requested index is not available
-     *
-     * @param index the index of the CosemValue to get
-     *
-     * @return {@link CosemValue} or null if not exist
-     */
-    public CosemValue<? extends Object> getCosemValue(int index) {
-        if (index >= 0 && index < cosemValues.size()) {
-            return cosemValues.get(index);
-        }
-        return null;
     }
 
     /**
@@ -151,7 +135,7 @@ public class CosemObject {
                 String cosemStringValue = cosemValueMatcher.group(2);
                 CosemValueDescriptor valueDescriptor = type.getDescriptor(cosemValueItr);
 
-                CosemValue<? extends Object> cosemValue = parseCosemValue(valueDescriptor, cosemStringValue);
+                CosemValue<?> cosemValue = parseCosemValue(valueDescriptor, cosemStringValue);
 
                 if (cosemValue != null) {
                     if (!cosemValues.containsKey(valueDescriptor.getChannelId())) {
@@ -179,16 +163,16 @@ public class CosemObject {
      *         CosemValueDescriptor
      * @throws ParseException if a CosemValue could not be created
      */
-    private CosemValue<? extends Object> parseCosemValue(CosemValueDescriptor cosemValueDescriptor,
-            String cosemValueString) throws ParseException {
-        Class<? extends CosemValue<? extends Object>> cosemValueClass = cosemValueDescriptor.getCosemValueClass();
+    private CosemValue<?> parseCosemValue(CosemValueDescriptor cosemValueDescriptor, String cosemValueString)
+            throws ParseException {
+        Class<? extends CosemValue<?>> cosemValueClass = cosemValueDescriptor.getCosemValueClass();
 
         String unit = cosemValueDescriptor.getUnit();
 
         try {
-            Constructor<? extends CosemValue<? extends Object>> c = cosemValueClass.getConstructor(String.class);
+            Constructor<? extends CosemValue<?>> c = cosemValueClass.getConstructor(String.class);
 
-            CosemValue<? extends Object> cosemValue = c.newInstance(unit);
+            CosemValue<?> cosemValue = c.newInstance(unit);
             cosemValue.setValue(cosemValueString);
 
             return cosemValue;

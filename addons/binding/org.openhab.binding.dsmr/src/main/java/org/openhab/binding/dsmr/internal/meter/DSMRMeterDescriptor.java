@@ -36,7 +36,6 @@ public class DSMRMeterDescriptor {
      *
      * @param meterType
      * @param channel
-     * @throws IllegalArgumentException if one of the parameters is null
      */
     public DSMRMeterDescriptor(DSMRMeterType meterType, int channel) {
         this.meterType = meterType;
@@ -53,7 +52,7 @@ public class DSMRMeterDescriptor {
     /**
      * @return the channel
      */
-    public Integer getChannel() {
+    public int getChannel() {
         return channel;
     }
 
@@ -68,7 +67,7 @@ public class DSMRMeterDescriptor {
      */
     @Override
     public boolean equals(Object other) {
-        if (other == null || !(other instanceof DSMRMeterDescriptor)) {
+        if (!(other instanceof DSMRMeterDescriptor)) {
             return false;
         }
         DSMRMeterDescriptor o = (DSMRMeterDescriptor) other;

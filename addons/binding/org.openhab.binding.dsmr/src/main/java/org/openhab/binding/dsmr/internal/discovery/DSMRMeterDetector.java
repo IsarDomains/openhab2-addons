@@ -59,8 +59,7 @@ public class DSMRMeterDetector {
                 DSMRMeterDescriptor prevDetectedMeter = detectedMeters.get(meterType.meterKind);
 
                 if (prevDetectedMeter == null // First meter of this kind, add it
-                        || (prevDetectedMeter != null
-                                && prevDetectedMeter.getChannel().equals(meterDescriptor.getChannel())
+                        || (prevDetectedMeter != null && prevDetectedMeter.getChannel() == meterDescriptor.getChannel()
                                 && meterType.requiredCosemObjects.length > prevDetectedMeter
                                         .getMeterType().requiredCosemObjects.length)) {
                     logger.debug("New compatible meter descriptor {}", meterDescriptor);
